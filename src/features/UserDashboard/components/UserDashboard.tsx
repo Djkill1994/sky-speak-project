@@ -1,5 +1,5 @@
 import { Box, Button, Stack } from "@mui/material";
-import { CardItem } from "../../../libs/ui-kit/CardItem.tsx";
+import { CardItem } from "~/libs/ui-kit/CardItem";
 import { useNavigate } from "@tanstack/react-router";
 
 const cardArray = [

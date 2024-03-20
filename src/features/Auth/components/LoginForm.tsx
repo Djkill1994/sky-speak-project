@@ -1,9 +1,9 @@
 import { Box, Grid, TextField } from "@mui/material";
-import { EMAIL_REGEX } from "~/constans/regex.ts";
-import { FormInputPassword } from "~/libs/ui-kit/FormInputPassword.tsx";
+import { EMAIL_REGEX } from "~/libs/constans/regex";
+import { FormInputPassword } from "~/libs/ui-kit/FormInputPassword";
 import { LoadingButton } from "@mui/lab";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { supabase } from "~/api/supavaseClient.ts";
+import { supabase } from "~/libs/core/supabaseClient";
 
 export interface ILoginForm {
   email: string;

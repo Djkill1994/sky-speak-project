@@ -1,9 +1,9 @@
 import { Box, Grid, TextField } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FormInputPassword } from "~/libs/ui-kit/FormInputPassword";
-import { EMAIL_REGEX } from "~/constans/regex";
+import { EMAIL_REGEX } from "~/libs/constans/regex";
 import { LoadingButton } from "@mui/lab";
-import { supabase } from "~/api/supavaseClient";
+import { supabase } from "~/libs/core/supabaseClient.ts";
 
 export interface IRegistrationForm {
   userName: string;
