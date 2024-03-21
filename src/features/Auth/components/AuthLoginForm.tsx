@@ -1,29 +1,27 @@
 import { Box, Grid, TextField } from "@mui/material";
-import { EMAIL_REGEX } from "~/libs/constans/regex";
-import { FormInputPassword } from "~/libs/ui-kit/FormInputPassword";
+import { EMAIL_REGEX } from "~/libs/constans";
+import { FormInputPassword } from "~/libs/ui-kit";
 import { LoadingButton } from "@mui/lab";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { supabase } from "~/libs/core/supabaseClient";
+import { useSignInWithPasswordApi } from "~/features/Auth/api";
+import { useNavigate } from "@tanstack/react-router";
 
 export interface ILoginForm {
   email: string;
   password: string;
 }
 
-export const LoginForm = () => {
+export const AuthLoginForm = () => {
+  const { mutateAsync: login } = useSignInWithPasswordApi();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ILoginForm>();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<ILoginForm> = async (data) => {
-    await supabase.auth.signInWithPassword({
-      email: data.email,
-      password: data.password,
-    });
-  };
+  const onSubmit: SubmitHandler<ILoginForm> = (data) =>
+    login(data).then(() => navigate({ to: "/user" }));
 
   return (
     <Box

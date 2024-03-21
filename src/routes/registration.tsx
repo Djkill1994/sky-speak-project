@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { RegistrationForm } from "~/features/Auth/components/RegistrationForm";
+import { AuthRegistrationForm } from "~/features/Auth/components";
 
 const Login = () => {
   return (
     <>
-      <RegistrationForm />
+      <AuthRegistrationForm />
     </>
   );
 };

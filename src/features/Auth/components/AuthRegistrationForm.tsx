@@ -1,9 +1,9 @@
 import { Box, Grid, TextField } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { FormInputPassword } from "~/libs/ui-kit/FormInputPassword";
-import { EMAIL_REGEX } from "~/libs/constans/regex";
+import { FormInputPassword } from "~/libs/ui-kit";
+import { EMAIL_REGEX } from "~/libs/constans";
 import { LoadingButton } from "@mui/lab";
-import { supabase } from "~/libs/core/supabaseClient.ts";
+import { supabaseClient } from "~/libs/core";
 
 export interface IRegistrationForm {
   userName: string;
@@ -11,7 +11,7 @@ export interface IRegistrationForm {
   password: string;
 }
 
-export const RegistrationForm = () => {
+export const AuthRegistrationForm = () => {
   const {
     register,
     handleSubmit,
@@ -20,7 +20,7 @@ export const RegistrationForm = () => {
   // const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<IRegistrationForm> = async (data) => {
-    await supabase.auth.signUp({
+    await supabaseClient.auth.signUp({
       email: data.email,
       password: data.password,
       options: {

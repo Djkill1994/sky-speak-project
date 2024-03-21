@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AdminDashboard } from "~/features/AdminDashboard/components/AdminDashboard";
+import { DashboardAdmin } from "~/features/Dashboard/components";
 
 const Admin = () => {
   return (
     <>
-      <AdminDashboard />
+      <DashboardAdmin />
     </>
   );
 };

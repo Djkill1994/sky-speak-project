@@ -1,14 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { UserDashboard } from "~/features/UserDashboard/components/UserDashboard";
+import { authGuard } from "~/features/Auth/helpers";
+import { DashboardUser } from "~/features/Dashboard/components";
 
 const User = () => {
   return (
     <>
-      <UserDashboard />
+      <DashboardUser />
     </>
   );
 };
 
 export const Route = createFileRoute("/user")({
   component: User,
+  beforeLoad: ({ location }) => authGuard(location),
 });
