@@ -8,11 +8,12 @@ import { ApiKeys, supabaseClient } from "~/libs/core";
 //   ru_word: string;
 // }
 
-export const useGetCard = () =>
+export const useGetCardApi = () =>
   useQuery({
     queryKey: [ApiKeys.getCard],
-    queryFn: async () => {
-      const { data } = await supabaseClient.from("card").select();
-      return data;
-    },
+    queryFn: async () =>
+      supabaseClient
+        .from("collections")
+        .select(`collection (name)  `)
+        .then(({ data }) => data),
   });

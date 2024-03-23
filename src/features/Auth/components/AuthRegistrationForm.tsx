@@ -24,7 +24,7 @@ export const AuthRegistrationForm = () => {
       email: data.email,
       password: data.password,
       options: {
-        emailRedirectTo: "user",
+        emailRedirectTo: "login",
         data: { userName: data.userName },
       },
     });

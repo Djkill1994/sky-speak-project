@@ -1,1 +1,1 @@
-export { useGetCard } from "./useGetCard";
+export { useGetCardApi } from "./useGetCardApi";

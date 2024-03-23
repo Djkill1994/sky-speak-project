@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { ApiKeys, supabaseClient } from "~/libs/core";
 
-export const useCurrentUserApi = (id: string) =>
+export const useCurrentUserApi = () =>
   useQuery({
-    queryKey: [ApiKeys.currentUser, id],
+    queryKey: [ApiKeys.currentUser],
     queryFn: async () => {
-      const { data } = await supabaseClient.auth.getUser(id);
+      const { data } = await supabaseClient.auth.getUser();
 
       return {
         email: data.user?.email,
