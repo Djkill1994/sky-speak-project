@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { ApiKeys, supabaseClient } from "~/libs/core";
 
-export const useGetCardApi = () =>
+export const useGetCollectionsApi = () =>
   useQuery({
-    queryKey: [ApiKeys.getCard],
+    queryKey: [ApiKeys.getCollections],
     queryFn: async () =>
       supabaseClient
-        .from("random_card")
+        .from("collection")
         .select()
         .then(({ data }) => data),
   });

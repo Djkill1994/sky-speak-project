@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as UserImport } from './routes/user'
 import { Route as RegistrationImport } from './routes/registration'
 import { Route as LoginImport } from './routes/login'
+import { Route as CollectionImport } from './routes/collection'
 import { Route as AdminImport } from './routes/admin'
 import { Route as IndexImport } from './routes/index'
 
@@ -31,6 +32,11 @@ const RegistrationRoute = RegistrationImport.update({
 
 const LoginRoute = LoginImport.update({
   path: '/login',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CollectionRoute = CollectionImport.update({
+  path: '/collection',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -56,6 +62,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminImport
       parentRoute: typeof rootRoute
     }
+    '/collection': {
+      preLoaderRoute: typeof CollectionImport
+      parentRoute: typeof rootRoute
+    }
     '/login': {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
@@ -76,6 +86,7 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
   AdminRoute,
+  CollectionRoute,
   LoginRoute,
   RegistrationRoute,
   UserRoute,

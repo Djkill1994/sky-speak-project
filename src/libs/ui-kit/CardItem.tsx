@@ -1,22 +1,22 @@
 import { Card, CardContent, CardMedia, Stack, Typography } from "@mui/material";
 
 export interface CardProps {
-  text1: string;
-  text2: string;
+  en_word: string | null;
+  ru_word: string | null;
   imgSrc: string;
 }
 
-export const CardItem = ({ text1, text2, imgSrc }: CardProps) => {
+export const CardItem = ({ en_word, ru_word, imgSrc }: CardProps) => {
   return (
     <Card sx={{ maxWidth: 240 }}>
       <CardMedia component="img" height="150" image={imgSrc} alt="Image" />
       <CardContent>
         <Stack alignItems="center">
           <Typography gutterBottom variant="h5" component="div">
-            {text1}
+            {en_word}
           </Typography>
           <Typography display="flex" gap="4px">
-            {text2}
+            {ru_word}
           </Typography>
         </Stack>
       </CardContent>
