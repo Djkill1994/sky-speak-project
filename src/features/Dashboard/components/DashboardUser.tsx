@@ -2,16 +2,22 @@ import { Box, Button, CircularProgress, Stack } from "@mui/material";
 import { useNavigate } from "@tanstack/react-router";
 import { useGetCollectionsApi } from "~/features/Dashboard/api";
 import { CollectionCards } from "~/libs/ui-kit";
+import { supabaseClient } from "~/libs/core";
 
 export const DashboardUser = () => {
   const navigate = useNavigate();
-  // const { data, isLoading } = useGetCardApi();
   const { data, isLoading } = useGetCollectionsApi();
-  console.log(data);
-  // const { data, isLoading } = useCurrentUserApi();
 
   return (
     <Box margin="8px">
+      <Button
+        onClick={async () => {
+          await supabaseClient.auth.signOut();
+          await navigate({ to: "/" });
+        }}
+      >
+        Exit
+      </Button>
       {isLoading ? (
         <CircularProgress />
       ) : (

@@ -8,7 +8,7 @@ export interface CardProps {
 
 export const CardItem = ({ en_word, ru_word, imgSrc }: CardProps) => {
   return (
-    <Card sx={{ maxWidth: 240 }}>
+    <Card sx={{ width: 200 }}>
       <CardMedia component="img" height="150" image={imgSrc} alt="Image" />
       <CardContent>
         <Stack alignItems="center">

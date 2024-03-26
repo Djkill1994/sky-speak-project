@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { authGuard } from "~/features/Auth/helpers";
 import { DashboardCardCollection } from "~/features/Dashboard/components";
 
-const Collection = () => {
+const CollectionCollectionId = () => {
   return (
     <>
       <DashboardCardCollection />
@@ -10,7 +10,7 @@ const Collection = () => {
   );
 };
 
-export const Route = createFileRoute(`/collection`)({
-  component: Collection,
+export const Route = createFileRoute(`/collection/$collectionId`)({
+  component: CollectionCollectionId,
   beforeLoad: ({ location }) => authGuard(location),
 });

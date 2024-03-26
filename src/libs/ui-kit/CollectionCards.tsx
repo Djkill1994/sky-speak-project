@@ -6,6 +6,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { useNavigate } from "@tanstack/react-router";
 
 export interface CardProps {
   name: string | null;
@@ -14,9 +15,18 @@ export interface CardProps {
 }
 
 export const CollectionCards = ({ name, imgSrc, id }: CardProps) => {
+  const navigate = useNavigate();
+
   return (
     <Card sx={{ width: 240 }}>
-      <CardActionArea onClick={() => console.log(id)}>
+      <CardActionArea
+        onClick={() =>
+          navigate({
+            to: "/collection/$collectionId",
+            params: { collectionId: id.toString() },
+          })
+        }
+      >
         <CardMedia component="img" height="150" image={imgSrc} alt="Image" />
         <CardContent>
           <Stack alignItems="center">
