@@ -18,6 +18,7 @@ export const DashboardUser = () => {
       >
         Exit
       </Button>
+      <Button onClick={() => console.log("LOL")}>Random card</Button>
       {isLoading ? (
         <CircularProgress />
       ) : (
