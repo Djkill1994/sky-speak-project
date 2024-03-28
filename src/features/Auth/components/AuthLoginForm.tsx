@@ -24,52 +24,60 @@ export const AuthLoginForm = () => {
     login(data).then(() => navigate({ to: "/user" }));
 
   return (
-    <Box
-      margin="100px auto"
-      width="300px"
-      component="form"
-      onSubmit={handleSubmit(onSubmit)}
-      noValidate
-    >
-      <Grid
-        container
-        spacing={1}
-        justifyContent="center"
+    <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
+      <Box
+        p="20px"
+        width="380px"
+        gap="15px"
         alignItems="center"
-        flexDirection="column"
+        justifyContent="center"
+        border="1px solid rgba(43, 43, 43, 0.568)"
+        borderRadius="15px"
+        bgcolor="rgba(255, 255, 255, 0.192)"
+        sx={{ backdropFilter: "blur(10px)" }}
       >
-        <Grid item xs={12} width="100%">
-          <TextField
-            {...register("email", { required: true, pattern: EMAIL_REGEX })}
-            error={!!errors.email}
-            helperText={!!errors.email && "email"}
-            size="small"
-            autoComplete="email"
-            label={"email"}
-            fullWidth
-          />
+        <Grid
+          gap="10px"
+          container
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="column"
+        >
+          <Grid item xs={12} width="100%">
+            <TextField
+              {...register("email", { required: true, pattern: EMAIL_REGEX })}
+              error={!!errors.email}
+              helperText={!!errors.email && "email"}
+              size="small"
+              autoComplete="email"
+              label={"email"}
+              fullWidth
+              color="success"
+            />
+          </Grid>
+          <Grid item xs={12} width="100%">
+            <FormInputPassword
+              id="password"
+              error={errors.password && "password"}
+              label={"password"}
+              inputProps={register("password", {
+                required: true,
+              })}
+            />
+          </Grid>
+          <Grid item xs={12} width="100%">
+            <LoadingButton
+              color="success"
+              type="submit"
+              variant="contained"
+              sx={{ mt: 3 }}
+              fullWidth
+            >
+              {"signUp"}
+            </LoadingButton>
+          </Grid>
         </Grid>
-        <Grid item xs={12} width="100%">
-          <FormInputPassword
-            id="password"
-            error={errors.password && "password"}
-            label={"password"}
-            inputProps={register("password", {
-              required: true,
-            })}
-          />
-        </Grid>
-        <Grid item xs={12} width="100%">
-          <LoadingButton
-            type="submit"
-            variant="contained"
-            sx={{ mt: 3 }}
-            fullWidth
-          >
-            {"signUp"}
-          </LoadingButton>
-        </Grid>
-      </Grid>
+      </Box>
     </Box>
   );
 };

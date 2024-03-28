@@ -11,12 +11,11 @@ export interface CardProps {
   en_word: string | null;
   ru_word: string | null;
   imgSrc: string;
-  onClose: () => void;
 }
 
-export const CardItem = ({ en_word, ru_word, imgSrc, onClose }: CardProps) => {
+export const CardItem = ({ en_word, ru_word, imgSrc }: CardProps) => {
   return (
-    <Modal open onClose={onClose} sx={{ display: "flex" }}>
+    <Modal open>
       <Card sx={{ width: 200 }}>
         <CardMedia component="img" height="150" image={imgSrc} alt="Image" />
         <CardContent>

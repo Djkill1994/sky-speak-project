@@ -21,7 +21,7 @@ export const FormInputPassword = ({ inputProps, error, label, id }: IProps) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   return (
-    <FormControl variant="outlined" size="small" fullWidth>
+    <FormControl color="success" variant="outlined" size="small" fullWidth>
       <InputLabel htmlFor={id} error={!!error}>
         {label}
       </InputLabel>
