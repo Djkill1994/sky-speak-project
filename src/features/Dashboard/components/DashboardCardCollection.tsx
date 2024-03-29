@@ -6,11 +6,11 @@ import { CardItem } from "~/libs/ui-kit";
 export const DashboardCardCollection = () => {
   const navigate = useNavigate();
   const { collectionId } = useParams({ from: "/collection/$collectionId" });
-  const { data, isLoading } = useGetCardCollectionApi(Number(collectionId));
+  const { data, isFetching } = useGetCardCollectionApi(Number(collectionId));
 
   return (
     <Box margin="8px">
-      {isLoading ? (
+      {isFetching ? (
         <CircularProgress />
       ) : (
         <Stack flexDirection="row" gap="8px">

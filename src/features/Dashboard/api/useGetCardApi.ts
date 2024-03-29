@@ -7,6 +7,8 @@ export const useGetCardApi = () =>
     queryFn: async () =>
       supabaseClient
         .from("random_card")
-        .select()
+        .select("img, en_word, ru_word")
+        .limit(1)
+        .single()
         .then(({ data }) => data),
   });

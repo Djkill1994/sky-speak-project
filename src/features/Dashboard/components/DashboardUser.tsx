@@ -3,13 +3,17 @@ import { useNavigate } from "@tanstack/react-router";
 import { useGetCollectionsApi } from "~/features/Dashboard/api";
 import { CollectionCards } from "~/libs/ui-kit";
 import { supabaseClient } from "~/libs/core";
+import { ModalCardItem } from "~/libs/ui-kit/ModalCardItem";
+import { useModal } from "~/libs/utils";
 
 export const DashboardUser = () => {
   const navigate = useNavigate();
-  const { data, isLoading } = useGetCollectionsApi();
+  const { data, isFetching } = useGetCollectionsApi();
+  const { isOpened, open, close } = useModal();
 
   return (
     <Box margin="8px">
+      {isOpened && <ModalCardItem onClose={close} />}
       <Button
         onClick={async () => {
           await supabaseClient.auth.signOut();
@@ -18,8 +22,7 @@ export const DashboardUser = () => {
       >
         Exit
       </Button>
-      <Button onClick={() => console.log("LOL")}>Random card</Button>
-      {isLoading ? (
+      {isFetching ? (
         <CircularProgress />
       ) : (
         <Stack flexDirection="row" gap="8px">
@@ -29,6 +32,7 @@ export const DashboardUser = () => {
         </Stack>
       )}
       <Button onClick={() => navigate({ to: "/" })}>Home</Button>
+      <Button onClick={() => open()}>Random Card</Button>
     </Box>
   );
 };
