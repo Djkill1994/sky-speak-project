@@ -33,6 +33,26 @@ export const DashboardUser = () => {
       )}
       <Button onClick={() => navigate({ to: "/" })}>Home</Button>
       <Button onClick={() => open()}>Random Card</Button>
+      <Button
+        onClick={() =>
+          navigate({
+            to: "/task/$taskname",
+            params: { taskname: "write-word" },
+          })
+        }
+      >
+        запиши слово
+      </Button>
+      <Button
+        onClick={() =>
+          navigate({
+            to: "/task/$taskname",
+            params: { taskname: "choose-correctly" },
+          })
+        }
+      >
+        выбери правильное слово
+      </Button>
     </Box>
   );
 };
