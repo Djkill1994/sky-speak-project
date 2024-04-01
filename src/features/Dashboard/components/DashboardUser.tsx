@@ -22,37 +22,47 @@ export const DashboardUser = () => {
       >
         Exit
       </Button>
-      {isFetching ? (
-        <CircularProgress />
-      ) : (
-        <Stack flexDirection="row" gap="8px">
-          {data?.map(({ img, id, name }) => (
-            <CollectionCards key={id} id={id} imgSrc={img} name={name} />
-          ))}
-        </Stack>
-      )}
-      <Button onClick={() => navigate({ to: "/" })}>Home</Button>
-      <Button onClick={() => open()}>Random Card</Button>
-      <Button
-        onClick={() =>
-          navigate({
-            to: "/task/$taskname",
-            params: { taskname: "write-word" },
-          })
-        }
-      >
-        запиши слово
-      </Button>
-      <Button
-        onClick={() =>
-          navigate({
-            to: "/task/$taskname",
-            params: { taskname: "choose-correctly" },
-          })
-        }
-      >
-        выбери правильное слово
-      </Button>
+      <Box padding="20px">
+        {isFetching ? (
+          <CircularProgress />
+        ) : (
+          <Stack flexDirection="row" gap="8px">
+            {data?.map(({ img, id, name }) => (
+              <CollectionCards key={id} id={id} imgSrc={img} name={name} />
+            ))}
+          </Stack>
+        )}
+      </Box>
+      <Stack flexDirection="row" gap="10px">
+        <Button variant="contained" onClick={() => navigate({ to: "/" })}>
+          Home
+        </Button>
+        <Button variant="contained" onClick={() => open()}>
+          Random Card
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() =>
+            navigate({
+              to: "/task/$taskname",
+              params: { taskname: "write-word" },
+            })
+          }
+        >
+          запиши слово
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() =>
+            navigate({
+              to: "/task/$taskname",
+              params: { taskname: "choose-correctly" },
+            })
+          }
+        >
+          выбери правильное слово
+        </Button>
+      </Stack>
     </Box>
   );
 };

@@ -16,20 +16,25 @@ interface ISubmitForm {
 }
 
 export const TaskWriteWord = () => {
-  const { register, handleSubmit } = useForm<ISubmitForm>();
+  const { register, handleSubmit, resetField } = useForm<ISubmitForm>();
+
   const { data: taskData, isFetching, refetch } = useGetCardApi();
-  const [isSuccessHandler, setIsSuccessHandler] = useState(false);
+  const [isAnswerOptions, setIsAnswerOptions] = useState(false);
+  const [isErrorHandler, setIsErrorHandler] = useState(false);
 
   const onSubmit: SubmitHandler<ISubmitForm> = (data) => {
+    setIsAnswerOptions(true);
     if (taskData!.en_word!.toLowerCase() == data.word?.toLowerCase()) {
-      setIsSuccessHandler(true);
+      setIsErrorHandler(false);
+      resetField("word");
     } else {
-      console.log("false");
+      setIsErrorHandler(true);
+      resetField("word");
     }
   };
 
   return (
-    <Box margin="auto" display="flex" alignItems="center" height="100vh">
+    <Box>
       {isFetching ? (
         <CircularProgress />
       ) : (
@@ -38,7 +43,7 @@ export const TaskWriteWord = () => {
             <Typography fontSize="1.5rem" fontWeight="600">
               {taskData!.ru_word}
             </Typography>
-            {!isSuccessHandler ? (
+            {!isAnswerOptions ? (
               <Box
                 display="flex"
                 gap="10px"
@@ -57,12 +62,16 @@ export const TaskWriteWord = () => {
               </Box>
             ) : (
               <Box display="flex" flexDirection="column" gap="20px">
-                <Typography fontSize="1.7rem" fontWeight="600" color="green">
+                <Typography
+                  fontSize="1.7rem"
+                  fontWeight="600"
+                  color={isErrorHandler ? "red" : "green"}
+                >
                   {taskData!.en_word}
                 </Typography>
                 <Button
                   onClick={() => {
-                    setIsSuccessHandler(false);
+                    setIsAnswerOptions(false);
                     refetch();
                   }}
                 >
