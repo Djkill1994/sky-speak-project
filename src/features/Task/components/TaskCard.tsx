@@ -14,7 +14,7 @@ export const TaskCard = ({ imgSrc, children }: ITaskCardProps) => {
         width: "550px",
       }}
     >
-      <CardMedia component="img" height="300" image={imgSrc} alt="Image" />
+      <CardMedia component="img" height="280px" image={imgSrc} alt="Image" />
       <CardContent>{children}</CardContent>
     </Card>
   );

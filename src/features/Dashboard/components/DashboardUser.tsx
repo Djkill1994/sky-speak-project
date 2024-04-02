@@ -38,7 +38,7 @@ export const DashboardUser = () => {
           Home
         </Button>
         <Button variant="contained" onClick={() => open()}>
-          Random Card
+          Случайная карточка
         </Button>
         <Button
           variant="contained"
@@ -49,7 +49,7 @@ export const DashboardUser = () => {
             })
           }
         >
-          запиши слово
+          Запиши слово
         </Button>
         <Button
           variant="contained"
@@ -60,7 +60,18 @@ export const DashboardUser = () => {
             })
           }
         >
-          выбери правильное слово
+          Выбери правильное слово
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() =>
+            navigate({
+              to: "/task/$taskname",
+              params: { taskname: "spell-out" },
+            })
+          }
+        >
+          Составь по буквам
         </Button>
       </Stack>
     </Box>

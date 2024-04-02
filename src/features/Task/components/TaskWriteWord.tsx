@@ -9,7 +9,8 @@ import {
 import { TaskCard } from "~/features/Task/components/TaskCard";
 import { useGetCardApi } from "~/features/Dashboard/api";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useState } from "react";
+import { useErrorHandler } from "~/features/Task/helpers/useErrorHandler";
+import { useAnswerOptions } from "~/features/Task/helpers/useAnswerOptions";
 
 interface ISubmitForm {
   word?: string;
@@ -19,16 +20,16 @@ export const TaskWriteWord = () => {
   const { register, handleSubmit, resetField } = useForm<ISubmitForm>();
 
   const { data: taskData, isFetching, refetch } = useGetCardApi();
-  const [isAnswerOptions, setIsAnswerOptions] = useState(false);
-  const [isErrorHandler, setIsErrorHandler] = useState(false);
+  const { isAnswerOptions, optionsTrue, optionsFalse } = useAnswerOptions();
+  const { isErrorHandler, noError, error } = useErrorHandler();
 
   const onSubmit: SubmitHandler<ISubmitForm> = (data) => {
-    setIsAnswerOptions(true);
+    optionsTrue();
     if (taskData!.en_word!.toLowerCase() == data.word?.toLowerCase()) {
-      setIsErrorHandler(false);
+      noError();
       resetField("word");
     } else {
-      setIsErrorHandler(true);
+      error();
       resetField("word");
     }
   };
@@ -61,7 +62,7 @@ export const TaskWriteWord = () => {
                 </Button>
               </Box>
             ) : (
-              <Box display="flex" flexDirection="column" gap="20px">
+              <Stack alignItems="center" gap="20px">
                 <Typography
                   fontSize="1.7rem"
                   fontWeight="600"
@@ -71,13 +72,13 @@ export const TaskWriteWord = () => {
                 </Typography>
                 <Button
                   onClick={() => {
-                    setIsAnswerOptions(false);
+                    optionsFalse();
                     refetch();
                   }}
                 >
                   Дальше
                 </Button>
-              </Box>
+              </Stack>
             )}
           </Stack>
         </TaskCard>

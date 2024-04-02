@@ -1,6 +1,9 @@
 import { AppBar, Box, Button } from "@mui/material";
-import { TaskChooseCorrectly } from "~/features/Task/components/TaskChooseCorrectly";
-import { TaskWriteWord } from "~/features/Task/components/TaskWriteWord";
+import {
+  TaskChooseCorrectly,
+  TaskSpellOut,
+  TaskWriteWord,
+} from "~/features/Task/components";
 import { useParams, useRouter } from "@tanstack/react-router";
 
 export const TaskBoard = () => {
@@ -21,6 +24,7 @@ export const TaskBoard = () => {
       >
         {taskname === "write-word" && <TaskWriteWord />}
         {taskname === "choose-correctly" && <TaskChooseCorrectly />}
+        {taskname === "spell-out" && <TaskSpellOut />}
       </Box>
     </Box>
   );
