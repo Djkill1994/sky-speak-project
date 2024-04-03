@@ -5,13 +5,16 @@ import { useEffect, useState } from "react";
 
 export const TaskSpellOut = () => {
   const { data, isFetching, refetch } = useGetCardApi();
-  const [isData, setIsData] = useState([""] || "");
+  const [selectedLetters, setSelectedLetters] = useState<string[]>([]);
+  const [secretWordLetters, setSecretWordLetters] = useState<string[]>([]);
+
   useEffect(() => {
-    if (!isFetching) {
-      const splitString = data?.en_word?.split("");
-      setIsData(splitString!);
+    if (data) {
+      setSecretWordLetters(
+        data?.en_word?.split("")?.sort(() => Math.random() - 0.3) || [],
+      );
     }
-  }, [isFetching]);
+  }, [data]);
 
   return (
     <Box>
@@ -29,7 +32,7 @@ export const TaskSpellOut = () => {
             </Typography>
             <Stack gap="30px" alignItems="center">
               <Stack flexDirection="row" gap="10px" alignItems="center">
-                {isData?.map((index) => (
+                {data?.en_word?.split("")?.map((_, index) => (
                   <Stack
                     alignItems="center"
                     justifyContent="center"
@@ -40,26 +43,30 @@ export const TaskSpellOut = () => {
                     key={index}
                     bgcolor="#b9b9b9"
                   >
-                    {index}
+                    {selectedLetters[index]}
                   </Stack>
                 ))}
               </Stack>
               <Stack flexDirection="row" gap="10px" alignItems="center">
-                {isData
-                  ?.sort(() => Math.random() - 0.3)
-                  .map((value, index) => (
-                    <Stack
-                      width="35px"
-                      height="35px"
-                      alignItems="center"
-                      justifyContent="center"
-                      border="1px solid black"
-                      borderRadius="4px"
-                      key={index}
-                    >
-                      {value}
-                    </Stack>
-                  ))}
+                {secretWordLetters?.map((value, index) => (
+                  <Stack
+                    width="35px"
+                    height="35px"
+                    alignItems="center"
+                    justifyContent="center"
+                    border="1px solid black"
+                    borderRadius="4px"
+                    key={index}
+                    onClick={() => {
+                      setSelectedLetters((prevState) => [...prevState, value]);
+                      setSecretWordLetters((prevState) =>
+                        prevState.filter((_, prevIndex) => index !== prevIndex),
+                      );
+                    }}
+                  >
+                    {value}
+                  </Stack>
+                ))}
               </Stack>
             </Stack>
           </Stack>

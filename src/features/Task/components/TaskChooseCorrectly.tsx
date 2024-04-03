@@ -10,15 +10,32 @@ import { TaskCard } from "~/features/Task/components/TaskCard";
 import { useGetRandomFourCardApi } from "~/features/Task/api/useGetRandomFourCardApi";
 import { useAnswerOptions, useErrorHandler } from "~/features/Task/helpers";
 
+// function shuffleArray<T>(array: T[]): T[] {
+//   for (let i = array.length - 1; i > 0; i--) {
+//     const j = Math.floor(Math.random() * (i + 1));
+//     [array[i], array[j]] = [array[j], array[i]];
+//   }
+//   return array;
+// }
+
+function shuffleArray(arr: any[]): any[] {
+  return Array(arr.length)
+    .fill(null)
+    .map((_, i) => [Math.random(), i])
+    .sort(([a], [b]) => a - b)
+    .map(([, i]) => arr[i]);
+}
+
 export const TaskChooseCorrectly = () => {
   const { data, isFetching, refetch } = useGetRandomFourCardApi();
   const { isAnswerOptions, optionsTrue, optionsFalse } = useAnswerOptions();
   const { isErrorHandler, noError, error } = useErrorHandler();
 
+  const shuffledData = shuffleArray(data || []);
+
+  console.log(shuffledData, data);
   const onSubmit = (value: string) => {
     optionsTrue();
-    console.log(data![0].en_word);
-    console.log(value, "value");
     if (data![0].en_word === value) {
       noError();
     } else {
@@ -56,21 +73,19 @@ export const TaskChooseCorrectly = () => {
               </Stack>
             ) : (
               <Grid container rowSpacing={1} columnSpacing={1}>
-                {data
-                  ?.sort(() => Math.random() - 0.3)
-                  .map(({ en_word, id }) => (
-                    <Grid item xs={6} key={id}>
-                      <Button
-                        fullWidth
-                        variant="outlined"
-                        onClick={() => {
-                          onSubmit(en_word!);
-                        }}
-                      >
-                        {en_word}
-                      </Button>
-                    </Grid>
-                  ))}
+                {shuffledData?.map(({ en_word, id }) => (
+                  <Grid item xs={6} key={id}>
+                    <Button
+                      fullWidth
+                      variant="outlined"
+                      onClick={() => {
+                        onSubmit(en_word!);
+                      }}
+                    >
+                      {en_word}
+                    </Button>
+                  </Grid>
+                ))}
               </Grid>
             )}
           </Stack>
