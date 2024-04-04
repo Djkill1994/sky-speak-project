@@ -3,3 +3,4 @@ export { TaskChooseCorrectly } from "./TaskChooseCorrectly";
 export { TaskWriteWord } from "./TaskWriteWord";
 export { TaskCard } from "./TaskCard";
 export { TaskSpellOut } from "./TaskSpellOut";
+export { TaskContentContainer } from "./TaskContentContainer";

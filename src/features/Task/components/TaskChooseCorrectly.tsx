@@ -8,23 +8,11 @@ import {
 } from "@mui/material";
 import { TaskCard } from "~/features/Task/components/TaskCard";
 import { useGetRandomFourCardApi } from "~/features/Task/api/useGetRandomFourCardApi";
-import { useAnswerOptions, useErrorHandler } from "~/features/Task/helpers";
-
-// function shuffleArray<T>(array: T[]): T[] {
-//   for (let i = array.length - 1; i > 0; i--) {
-//     const j = Math.floor(Math.random() * (i + 1));
-//     [array[i], array[j]] = [array[j], array[i]];
-//   }
-//   return array;
-// }
-
-function shuffleArray(arr: any[]): any[] {
-  return Array(arr.length)
-    .fill(null)
-    .map((_, i) => [Math.random(), i])
-    .sort(([a], [b]) => a - b)
-    .map(([, i]) => arr[i]);
-}
+import {
+  shuffleArray,
+  useAnswerOptions,
+  useErrorHandler,
+} from "~/features/Task/helpers";
 
 export const TaskChooseCorrectly = () => {
   const { data, isFetching, refetch } = useGetRandomFourCardApi();
@@ -33,7 +21,6 @@ export const TaskChooseCorrectly = () => {
 
   const shuffledData = shuffleArray(data || []);
 
-  console.log(shuffledData, data);
   const onSubmit = (value: string) => {
     optionsTrue();
     if (data![0].en_word === value) {
