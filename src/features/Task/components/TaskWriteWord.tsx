@@ -11,6 +11,7 @@ import { useGetCardApi } from "~/features/Dashboard/api";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useErrorHandler } from "~/features/Task/helpers/useErrorHandler";
 import { useAnswerOptions } from "~/features/Task/helpers/useAnswerOptions";
+import { speakText } from "~/libs/utils";
 
 interface ISubmitForm {
   word?: string;
@@ -27,6 +28,7 @@ export const TaskWriteWord = () => {
     optionsTrue();
     if (taskData!.en_word!.toLowerCase() == data.word?.toLowerCase()) {
       noError();
+      speakText(taskData?.en_word || "");
       resetField("word");
     } else {
       error();
